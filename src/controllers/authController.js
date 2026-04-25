@@ -28,8 +28,8 @@ const registerUser = async (req, res) => {
     });
     res.cookie("token", token, {
       httpOnly: true,
-      secure: false,
-      sameSite: 'lax',
+      secure: true,
+      sameSite: 'none',
       path: '/'
     });
 
@@ -66,8 +66,8 @@ const loginUser = async (req, res) => {
     });
     res.cookie("token", token, {
       httpOnly: true,
-      secure: false,
-      sameSite: 'lax',
+      secure: true,
+      sameSite: 'none',
       path: '/'
     });
 
@@ -78,7 +78,7 @@ const loginUser = async (req, res) => {
 };
 
 const logoutUser = (req, res) => {
-  res.clearCookie("token", { httpOnly: true, path: '/' });
+  res.clearCookie("token", { httpOnly: true, path: '/', sameSite: 'none', secure: true });
   res.status(200).json({ message: "Logout successful" });
 };
 
@@ -110,6 +110,9 @@ const registerPartner = async (req, res) => {
   });
   res.cookie("token", token, {
     httpOnly: true,
+    secure: true,
+    sameSite: 'none',
+    path: '/'
   });
 
   await newPartner.save();
@@ -140,8 +143,8 @@ const loginPartner = async (req, res) => {
     });
     res.cookie("token", token, {
       httpOnly: true,
-      secure: false,
-      sameSite: 'lax',
+      secure: true,
+      sameSite: 'none',
       path: '/'
     });
 
@@ -152,7 +155,7 @@ const loginPartner = async (req, res) => {
 };
 
 const logoutPartner = (req, res) => {
-  res.clearCookie("token", { httpOnly: true, path: '/', sameSite: 'lax', secure: false });
+  res.clearCookie("token", { httpOnly: true, path: '/', sameSite: 'none', secure: true });
   res.status(200).json({ message: "Logout successful" });
 };
 

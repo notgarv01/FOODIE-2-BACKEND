@@ -11,12 +11,9 @@ const storage = multer.memoryStorage();
 const upload = multer({ storage });
 
 const app = express();
-const allowedOrigins = process.env.ALLOWED_ORIGINS 
-  ? process.env.ALLOWED_ORIGINS.split(',')
-  : ["http://localhost:5173", "http://localhost:5174"];
-
+// Temporary: Allow all origins for debugging
 app.use(cors({
-  origin: allowedOrigins,
+  origin: true,
   credentials: true
 }));
 app.use(cookieParser());

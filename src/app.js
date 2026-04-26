@@ -48,10 +48,7 @@ app.get("/", (req, res) => {
 });
 
 app.use("/api/auth", authRoutes);
-app.use("/api/food", upload.fields([
-  { name: "image", maxCount: 1 },
-  { name: "videoFile", maxCount: 1 }
-]), foodRoutes);
+app.use("/api/food", foodRoutes);
 app.use("/api/user", upload.single("profilePhoto"), userRoutes);
 
 

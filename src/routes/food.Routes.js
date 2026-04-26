@@ -2,16 +2,8 @@ const express = require("express");
 const router = express.Router();
 const foodController = require("../controllers/foodController");
 const authMiddleware = require("../middlewares/authMiddleware");
-const multer = require("multer");
 
-// Multer Configuration for file uploads
-const storage = multer.memoryStorage();
-const upload = multer({ storage });
-
-router.post('/create', upload.fields([
-  { name: "image", maxCount: 1 },
-  { name: "videoFile", maxCount: 1 }
-]), authMiddleware.authFoodPartnerMiddleware, foodController.createFood);
+router.post('/create', authMiddleware.authFoodPartnerMiddleware, foodController.createFood);
 router.get("/", authMiddleware.authUserMiddleware, foodController.getFoods);
 router.get("/restaurants", foodController.getRestaurants);
 router.get("/dashboard", authMiddleware.authFoodPartnerMiddleware, foodController.getDashboardStats);

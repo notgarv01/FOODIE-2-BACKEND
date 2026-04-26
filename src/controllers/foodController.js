@@ -116,6 +116,9 @@ const updateFoodPartnerProfile = async (req, res) => {
     } else if (req.body.imageUrl) {
       // If imageUrl is provided in form data (for existing URLs or base64)
       imageUrl = req.body.imageUrl;
+    } else if (req.body.image) {
+      // If image is provided in JSON body (base64 string from frontend)
+      imageUrl = req.body.image;
     }
 
     // Parse other form fields (handle FormData)
